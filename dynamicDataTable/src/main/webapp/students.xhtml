@@ -1,0 +1,20 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>PrimeFaces 5  DataTable  with Dynamic  Columns  Example</title>
+    </h:head>
+    <h:body>
+       <h3>PrimeFaces 5  DataTable  with Dynamic  Columns  Example</h3>
+		<h:form>
+			<p:dataTable value="#{dataTableView.studentList}" var="student">
+				<p:columns value="#{dataTableView.dataTableColumns}" var="column" sortBy="#{student[column.property]}">
+		            <f:facet name="header">
+		                <h:outputText value="#{column.header}" />
+		            </f:facet>
+		            <h:outputText value="#{student[column.property]}" />				       
+				</p:columns>
+		    </p:dataTable>
+		</h:form>
+    </h:body>
+</html>	

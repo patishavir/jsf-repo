@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+archivesBaseName = 'primefaces5'
+version = '1' 
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile 'com.sun.faces:jsf-api:2.2.9'
+    compile 'com.sun.faces:jsf-impl:2.2.9'
+	compile 'org.primefaces:primefaces:5.1'
+	compile 'javax.enterprise:cdi-api:1.2'
+} 

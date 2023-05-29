@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Primefaces</title>
+</h:head>
+<h:body>
+	<h2>Paginator showcase</h2>
+	<div class="card">
+		<h:form>
+			<p:dataTable value="#{viewEmployeesManagedBean.employees}"
+				var="employee" rows="10" paginator="true" paginatorPosition="both"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Employee ID"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{employee.employeeId}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Employee Name"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{employee.employeeName}"></h:outputText>
+				</p:column>
+				<f:facet name="paginatorTopLeft">
+					<p:commandButton type="button" icon="pi pi-refresh" />
+				</f:facet>
+
+				<f:facet name="paginatorBottomRight">
+					<p:commandButton type="button" icon="pi pi-cloud-upload" />
+				</f:facet>
+
+			</p:dataTable>
+		</h:form>
+	</div>
+</h:body>
+</html>

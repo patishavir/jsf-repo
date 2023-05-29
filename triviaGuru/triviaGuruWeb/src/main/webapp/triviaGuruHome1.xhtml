@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Question entry form</title>
+</h:head>
+<h:body>
+	<h3>Question entry form</h3>
+	<p:panelGrid columns="2">
+		<h:outputText value="Theme switcher" />
+		<p:themeSwitcher id="defaultSwitcher" value="#{themeSwitcherBean.theme>
+			
+			<f:selectItem itemLabel="Select a theme:" itemValue="" />
+			
+			
+			<f:selectItems value="#{themeSwitcherBean.themes}" var="theme"
+				itemLabel="#{theme}" itemValue="#{theme}" />
+		</p:themeSwitcher>
+	</p:panelGrid>
+	<div class="card">
+		<h:form>
+			<h5 class="mt-0">Basic</h5>
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="question" value="Question: " id="display" />
+				<p:inputText id="question" value="#{questionBean.question}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="imageUrl" value="Image URL: " />
+				<p:inputText id="imageUrl" value="#{questionBean.imageUrl}" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="correctAnswerIndex"
+					value="Correct answer index: " />
+				<p:inputText id="correctAnswerIndex"
+					value="#{questionBean.correctAnswerIndex}" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="answerText" value=">Answer text: " />
+				<p:inputText id="answerText" value="#{questionBean.answerText}" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="answer1" value="Answer 1: " />
+				<p:inputText id="answer1" value="#{questionBean.answer1}" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="answer2" value="Answer 2: " />
+				<p:inputText id="answer2" value="#{questionBean.answer2}" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="answer3" value="Answer 3: " />
+				<p:inputText id="answer3" value="#{questionBean.answer3}" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="answer4" value="Answer 4: " />
+				<p:inputText id="answer4" value="#{questionBean.answer4}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="difficultyLevel" value="Difficulty level: " />
+				<p:inputText id="difficultyLevel"
+					value="#{questionBean.difficultyLevel}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="subject" value="Subject : " />
+				<p:inputText id="subject" value="#{questionBean.subject}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="language" value="Language: " />
+				<p:inputText id="language" value="#{questionBean.language}" />
+			</h:panelGrid>
+
+			<p:commandButton value="Add question" update="display"
+				styleClass="mt-3" />
+		</h:form>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,6 @@
+# ignore Compiled class file
+*.class
+# ignore jar files
+*.jar
+# ignore log files
+*.log

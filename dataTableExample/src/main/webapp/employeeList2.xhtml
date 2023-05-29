@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Primefaces</title>
+</h:head>
+<h:body>
+	<h2>JournalDev Tutorials - DataTable</h2>
+	<h2>
+		<p:outputLabel value="JournalDev - JSF2/Primefaces Tutorial"></p:outputLabel>
+	</h2>
+	<p:panel id="myPanel">
+		<p:dataTable value="#{viewEmployeesManagedBean.employees}"
+			var="employee">
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Employee ID"></h:outputText>
+				</f:facet>
+				<h:inputText id='id-#{employee.employeeId}' widgetVar="x"
+					value="#{employee.employeeId}"
+					disabled="#{employee.disabledForEditing}"></h:inputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="  Employee Name"></h:outputText>
+				</f:facet>
+				<h:inputText id='name-#{employee.employeeId}'
+					value="#{employee.employeeName}"
+					disabled="#{employee.disabledForEditing}"></h:inputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="delete"></h:outputText>
+				</f:facet>
+				<h:form>
+					<p:commandButton icon="pi pi-trash" update="growl"
+						action="#{employee.delete}" title="delete"></p:commandButton>
+					<p:growl id="growl" life="3000" />
+				</h:form>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="edit"></h:outputText>
+				</f:facet>
+				<h:form>
+					<p:commandButton icon="pi pi-pencil"
+						action="#{employee.setDisabledForEditing(false)}" title="edit"
+						update="myPanel"></p:commandButton>
+				</h:form>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="save"></h:outputText>
+				</f:facet>
+				<h:form>
+					<p:commandButton icon="pi pi-save" action="#{employee.save()}"
+						title="save" update="myPanel" type="submit"
+						disabled="#{employee.disabledForEditing}">
+						<f:ajax render="workplace" listener="#{employee.setEmployeeId("6789")}" />
+					</p:commandButton>
+				</h:form>
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+
+</h:body>
+</html>
