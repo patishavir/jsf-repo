@@ -13,70 +13,54 @@
 </h:head>
 <h:body>
 	<h3>Question entry form</h3>
-	<div class="card">
-		<h5 style="margin-top: 0">Basic</h5>
-		<p:panelGrid columns="2">
-			<f:facet name="header">
-				<p:graphicImage name="demo/images/misc/kobe.png" />
-			</f:facet>
-
-			<h:outputText value="Name:" />
-			<h:outputText value="Kobe Bryant" />
-
-			<h:outputText value="Team:" />
-			<h:outputText value="Los Angeles Lakers" />
-
-			<h:outputText value="Position:" />
-			<h:outputText value="Shooting Guard" />
-
-			<h:outputText value="Number:" />
-			<h:outputText value="24" />
-		</p:panelGrid>
-	</div>
-
 
 	<div class="card">
 		<h:form>
-			<h5 class="mt-0">Basic</h5>
 			<h:panelGrid columns="2" cellpadding="7">
 				<p:outputLabel for="question" value="Question: " id="qpanelGrid" />
 				<p:inputText id="question" value="#{questionBean.question}"
-					size="80" required="true" />
+					size="100" required="true" />
 
 				<p:outputLabel for="imageUrl" value="Image URL: " />
 				<p:inputText id="imageUrl" value="#{questionBean.imageUrl}"
-					size="80" />
+					size="100" />
 
 				<p:outputLabel for="correctAnswerIndex"
 					value="Correct answer index: " />
-				<p:inputText id="correctAnswerIndex"
-					value="#{questionBean.correctAnswerIndex}" size="1" maxlength="1" />
+				<p:inputNumber id="correctAnswerIndex"
+					value="#{questionBean.correctAnswerIndex}" size="1" maxlength="1"
+					minValue="0" maxValue="4" decimalPlaces="0" />
 
 				<p:outputLabel for="answerText" value="Answer text: " />
 				<p:inputText id="answerText" value="#{questionBean.answerText}"
-					size="80" />
+					size="100" />
 
 				<p:outputLabel for="answer1" value="Answer 1: " />
-				<p:inputText id="answer1" value="#{questionBean.answer1}" size="80" />
+				<p:inputText id="answer1" value="#{questionBean.answer1}" size="100" />
 
 				<p:outputLabel for="answer2" value="Answer 2: " />
-				<p:inputText id="answer2" value="#{questionBean.answer2}" size="80" />
+				<p:inputText id="answer2" value="#{questionBean.answer2}" size="100" />
 
 				<p:outputLabel for="answer3" value="Answer 3: " />
-				<p:inputText id="answer3" value="#{questionBean.answer3}" size="80" />
+				<p:inputText id="answer3" value="#{questionBean.answer3}" size="100" />
 
 				<p:outputLabel for="answer4" value="Answer 4: " />
-				<p:inputText id="answer4" value="#{questionBean.answer4}" size="80" />
+				<p:inputText id="answer4" value="#{questionBean.answer4}" size="100" />
 
 				<p:outputLabel for="difficultyLevel" value="Difficulty level: " />
-				<p:inputText id="difficultyLevel"
-					value="#{questionBean.difficultyLevel}" size="1" maxlength="1" />
+				<p:inputNumber id="difficultyLevel"
+					value="#{questionBean.difficultyLevel}" size="1" maxlength="1"
+					minValue="0" maxValue="9" decimalPlaces="0" emptyValue="0" />
 
-				<p:outputLabel for="subject" value="Subject : " />
-				<p:inputText id="subject" value="#{questionBean.subject}" />
+			<p:outputLabel value="Subject: " />
+				<p:selectOneMenu id="subject" value="questionBean.subject">
+					<f:selectItems value="#{questionBean.subjects}" />
+				</p:selectOneMenu>
 
-				<p:outputLabel for="language" value="Language: " />
-				<p:inputText id="language" value="#{questionBean.language}" size="2" />
+				<p:outputLabel value="Language: " />
+				<p:selectOneMenu id="language" value="questionBean.language">
+					<f:selectItems value="#{questionBean.languages}" />
+				</p:selectOneMenu>
 			</h:panelGrid>
 
 			<p:commandButton value="Add question" update="qpanelGrid"

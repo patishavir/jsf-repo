@@ -1,10 +1,14 @@
-package com.focus.common;
+package com.focus.entity;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import com.focus.utils.DbUtils;
 
 @ManagedBean(name = "questionBean", eager = true)
 @SessionScoped
@@ -12,16 +16,21 @@ public class QuestionBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = Logger.getLogger(DbUtils.class.getName());
+	private static final Logger logger = Logger.getLogger(QuestionBean.class.getName());
+	private static final List<String> languages = Arrays.asList("HE", "EN");
+	private static final List<String> subjects = Arrays.asList("ערים בישראל", "פוליטיקה ישראלית");
+
 	private String question = "how much is 2 + 2 ?";
 	private String imageUrl;
 	private int correctAnswerIndex;
 	private String answerText;
 	private String answer1;
 	private String answer2;
+
 	private String answer3;
 	private String answer4;
 	private int difficultyLevel;
+
 	private String subject;
 
 	private String language;
@@ -67,12 +76,20 @@ public class QuestionBean implements Serializable {
 		return language;
 	}
 
+	public final List<String> getLanguages() {
+		return languages;
+	}
+
 	public final String getQuestion() {
 		return question;
 	}
 
 	public final String getSubject() {
 		return subject;
+	}
+
+	public final List<String> getSubjects() {
+		return subjects;
 	}
 
 	public final void setAnswer1(String answer1) {
@@ -129,5 +146,4 @@ public class QuestionBean implements Serializable {
 		System.out.println("subject set to:" + subject);
 		this.subject = subject;
 	}
-
 }

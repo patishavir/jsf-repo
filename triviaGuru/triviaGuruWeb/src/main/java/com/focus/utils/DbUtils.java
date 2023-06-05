@@ -1,4 +1,4 @@
-package com.focus.common;
+package com.focus.utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.focus.entity.QuestionBean;
 
 public class DbUtils {
 	private static final Logger logger = Logger.getLogger(DbUtils.class.getName());
