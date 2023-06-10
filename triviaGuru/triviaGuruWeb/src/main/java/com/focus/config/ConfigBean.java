@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class ThemeSwitcherBean {
+public class ConfigBean {
 	private String theme = "cupertino";
 	private static final List<String> themes = new ArrayList<String>(Arrays.asList("afterdark", "afternoon",
 			"afterwork", "aristo", "black-tie", "blitzer", "bluesky", "bootstrap", "casablanca", "cruze", "cupertino",
@@ -18,7 +18,7 @@ public class ThemeSwitcherBean {
 			"smoothness", "south-street", "start", "sunny", "swanky-purse", "themes-project", "trontastic",
 			"ui-darkness", "ui-lightness", "vader"));
 
-	public ThemeSwitcherBean() {
+	public ConfigBean() {
 		// TODO Auto-generated constructor stub
 	}
 

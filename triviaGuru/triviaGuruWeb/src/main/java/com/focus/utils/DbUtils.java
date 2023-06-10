@@ -32,24 +32,24 @@ public class DbUtils {
 
 	}
 
-	public static void addQuestion(final QuestionBean q) {
+	public static void addQuestion(final QuestionBean questionq) {
 		logger.info("starting addQuestion ...");
 		Connection connection = getConnection();
 		final String sqlInsert = "INSERT INTO questions (question, imageUrl, correctAnswerIndex, answerText, answer1, answer2, answer3, answer4, difficultyLevel, subject, timeStamp ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 
 			PreparedStatement pst = connection.prepareStatement(sqlInsert);
-			pst.setString(1, q.getQuestion());
-			pst.setString(2, q.getImageUrl());
-			pst.setInt(3, q.getCorrectAnswerIndex());
-			pst.setString(4, q.getAnswerText());
+			pst.setString(1, questionq.getQuestion());
+			pst.setString(2, questionq.getImageUrl());
+			pst.setInt(3, questionq.getCorrectAnswerIndex());
+			pst.setString(4, questionq.getAnswerText());
 			logger.info(" { q.getAnswer1(), q.getAnswer2(),  q.getAnswer3(), q.getAnswer4() ");
-			pst.setString(5, q.getAnswer1());
-			pst.setString(6, q.getAnswer2());
-			pst.setString(7, q.getAnswer3());
-			pst.setString(8, q.getAnswer4());
-			pst.setInt(9, q.getDifficultyLevel());
-			pst.setString(10, q.getSubject());
+			pst.setString(5, questionq.getAnswer1());
+			pst.setString(6, questionq.getAnswer2());
+			pst.setString(7, questionq.getAnswer3());
+			pst.setString(8, questionq.getAnswer4());
+			pst.setInt(9, questionq.getDifficultyLevel());
+			pst.setString(10, questionq.getSubject());
 			pst.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
 			logger.info(pst.toString());
 			int row = pst.executeUpdate();
