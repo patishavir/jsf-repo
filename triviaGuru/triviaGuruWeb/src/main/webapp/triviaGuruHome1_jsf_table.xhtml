@@ -16,7 +16,24 @@
 
 	<div class="card">
 		<h:form>
+			<p:outputLabel for="theme" value="Theme" />
+			<p:themeSwitcher id="theme" style="width:165px" effect="fade" var="t">
+				<p:ajax />
+				<f:selectItem itemLabel="Choose Theme" itemValue="#{null}" />
+				<f:selectItems value="#{themeSwitcherView.themes}" var="theme"
+					itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+				<p:column>
+					<h:outputText styleClass="ui-theme ui-theme-#{t.name}"
+						style="display-block" />
+				</p:column>
+				<p:column>
+                        #{t.displayName}
+                </p:column>
+			</p:themeSwitcher>
+			<p:separator />
+
 			<h:panelGrid columns="2" cellpadding="7">
+
 				<p:outputLabel for="question" value="Question: " id="qpanelGrid" />
 				<p:inputText id="question" value="#{questionBean.question}"
 					size="100" required="true" />
@@ -52,7 +69,7 @@
 					value="#{questionBean.difficultyLevel}" size="1" maxlength="1"
 					minValue="0" maxValue="9" decimalPlaces="0" emptyValue="0" />
 
-			<p:outputLabel value="Subject: " />
+				<p:outputLabel value="Subject: " />
 				<p:selectOneMenu id="subject" value="questionBean.subject">
 					<f:selectItems value="#{questionBean.subjects}" />
 				</p:selectOneMenu>
@@ -63,7 +80,8 @@
 				</p:selectOneMenu>
 			</h:panelGrid>
 
-			<p:commandButton value="Add question" update="qpanelGrid"
+			<p:commandButton value="Add question"
+				actionListener="#{questionBean.addQuestion}" update="qpanelGrid"
 				styleClass="mt-3" />
 		</h:form>
 	</div>

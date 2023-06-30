@@ -20,7 +20,7 @@ public class QuestionBean implements Serializable {
 	private static final List<String> languages = Arrays.asList("HE", "EN");
 	private static final List<String> subjects = Arrays.asList("ערים בישראל", "פוליטיקה ישראלית");
 
-	private String question = "how much is 2 + 2 ?";
+	private String question;
 	private String imageUrl;
 	private int correctAnswerIndex;
 	private String answerText;

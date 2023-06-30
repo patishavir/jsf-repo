@@ -37,7 +37,6 @@ public class DbUtils {
 		Connection connection = getConnection();
 		final String sqlInsert = "INSERT INTO questions (question, imageUrl, correctAnswerIndex, answerText, answer1, answer2, answer3, answer4, difficultyLevel, subject, timeStamp ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
-
 			PreparedStatement pst = connection.prepareStatement(sqlInsert);
 			pst.setString(1, questionq.getQuestion());
 			pst.setString(2, questionq.getImageUrl());
@@ -54,9 +53,7 @@ public class DbUtils {
 			logger.info(pst.toString());
 			int row = pst.executeUpdate();
 			logger.info(String.valueOf(row).concat(" row has been successfully inserted"));
-		} catch (
-
-		Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			logger.warning(ex.getMessage());
 		}
