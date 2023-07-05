@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
 
 import com.focus.utils.DbUtils;
 
@@ -26,18 +29,21 @@ public class QuestionBean implements Serializable {
 	private String answerText;
 	private String answer1;
 	private String answer2;
-
 	private String answer3;
 	private String answer4;
 	private int difficultyLevel;
-
 	private String subject;
-
 	private String language;
 
-	public void addQuestion() {
+	public String addQuestion() {
 		logger.info("starting addQuestion ...");
-		DbUtils.addQuestion(this);
+		String resultMessage = DbUtils.addQuestion(this);
+		UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
+		String string2Return = view.getViewId() + "777?faces-redirect=true";
+		logger.info(string2Return);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Successful", "Your message: " + resultMessage));
+		return string2Return;
 	}
 
 	public final String getAnswer1() {

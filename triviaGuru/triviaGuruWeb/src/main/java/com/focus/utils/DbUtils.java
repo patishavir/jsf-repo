@@ -24,7 +24,7 @@ public class DbUtils {
 
 			connection = ds.getConnection();
 			logger.info("------------------- connection:".concat(connection.toString()));
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			ex.printStackTrace();
 			logger.info("------------------ exception message:".concat(ex.getMessage()));
 		}
@@ -32,10 +32,11 @@ public class DbUtils {
 
 	}
 
-	public static void addQuestion(final QuestionBean questionq) {
+	public static String addQuestion(final QuestionBean questionq) {
 		logger.info("starting addQuestion ...");
 		Connection connection = getConnection();
 		final String sqlInsert = "INSERT INTO questions (question, imageUrl, correctAnswerIndex, answerText, answer1, answer2, answer3, answer4, difficultyLevel, subject, timeStamp ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		String resultMessage= null;
 		try {
 			PreparedStatement pst = connection.prepareStatement(sqlInsert);
 			pst.setString(1, questionq.getQuestion());
@@ -52,10 +53,13 @@ public class DbUtils {
 			pst.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
 			logger.info(pst.toString());
 			int row = pst.executeUpdate();
-			logger.info(String.valueOf(row).concat(" row has been successfully inserted"));
+			resultMessage = String.valueOf(row).concat(" row has been successfully inserted");
+			logger.info(resultMessage);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			logger.warning(ex.getMessage());
+			resultMessage = ex.getMessage();
 		}
+		return resultMessage;
 	}
 }
