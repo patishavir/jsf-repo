@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.util.logging.Logger;
 
+import javax.faces.application.FacesMessage;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
@@ -32,11 +33,11 @@ public class DbUtils {
 
 	}
 
-	public static String addQuestion(final QuestionBean questionq) {
+	public static FacesMessage addQuestion(final QuestionBean questionq) {
 		logger.info("starting addQuestion ...");
 		Connection connection = getConnection();
 		final String sqlInsert = "INSERT INTO questions (question, imageUrl, correctAnswerIndex, answerText, answer1, answer2, answer3, answer4, difficultyLevel, subject, timeStamp ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-		String resultMessage= null;
+		FacesMessage resultMessage = null;
 		try {
 			PreparedStatement pst = connection.prepareStatement(sqlInsert);
 			pst.setString(1, questionq.getQuestion());
@@ -53,13 +54,16 @@ public class DbUtils {
 			pst.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
 			logger.info(pst.toString());
 			int row = pst.executeUpdate();
-			resultMessage = String.valueOf(row).concat(" row has been successfully inserted");
-			logger.info(resultMessage);
+			resultMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "insert has succeeded.<br/>",
+					String.valueOf(row).concat(" rows have been successfully inserted !"));
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			logger.warning(ex.getMessage());
-			resultMessage = ex.getMessage();
+			resultMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "insert has failed.<br/>", ex.getMessage().concat(" !"));
+
 		}
+		logger.info(resultMessage.getDetail() + " " + resultMessage.getDetail());
 		return resultMessage;
 	}
 }

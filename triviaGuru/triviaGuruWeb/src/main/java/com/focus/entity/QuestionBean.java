@@ -34,15 +34,17 @@ public class QuestionBean implements Serializable {
 	private int difficultyLevel;
 	private String subject;
 	private String language;
+	private FacesMessage resultMessage;
 
 	public String addQuestion() {
 		logger.info("starting addQuestion ...");
-		String resultMessage = DbUtils.addQuestion(this);
+		resultMessage = DbUtils.addQuestion(this);
 		UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
+		FacesContext context = FacesContext.getCurrentInstance();
+		logger.info(resultMessage.getSummary() + " " + resultMessage.getDetail());
+		context.addMessage(null, resultMessage);
 		String string2Return = view.getViewId() + "777?faces-redirect=true";
 		logger.info(string2Return);
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Successful", "Your message: " + resultMessage));
 		return string2Return;
 	}
 
@@ -88,6 +90,10 @@ public class QuestionBean implements Serializable {
 
 	public final String getQuestion() {
 		return question;
+	}
+
+	public FacesMessage getResultMessage() {
+		return resultMessage;
 	}
 
 	public final String getSubject() {
@@ -146,6 +152,10 @@ public class QuestionBean implements Serializable {
 	public final void setQuestion(String question) {
 		System.out.println("question set to:" + question);
 		this.question = question;
+	}
+
+	public void setResultMessage(FacesMessage resultMessage) {
+		this.resultMessage = resultMessage;
 	}
 
 	public final void setSubject(String subject) {
