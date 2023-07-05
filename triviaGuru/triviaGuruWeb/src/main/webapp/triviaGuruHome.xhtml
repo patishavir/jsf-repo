@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Question entry form</title>
+</h:head>
+<h:body>
+	<h1 align="center">Question entry form</h1>
+	<div class="card">
+		<h:form>
+			<p:themeSwitcher id="theme" value="#{configBean.theme}"
+				style="width:165px;float:right" effect="fade" var="t">
+				<p:ajax />
+				<f:selectItem itemLabel="Choose Theme" itemValue="#{null}" />
+				<f:selectItems value="#{themeSwitcherView.themes}" var="theme"
+					itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+				<p:column>
+					<h:outputText styleClass="ui-theme ui-theme-#{t.name}"
+						style="display-block" />
+				</p:column>
+				<p:column>
+                        #{t.displayName}
+                </p:column>
+			</p:themeSwitcher>
+			<p:outputLabel for="theme" value="Theme:&nbsp;&nbsp;"
+				style="float:right;" />
+			<br />
+			<br />
+			<p:separator />
+
+			<h:panelGrid columns="2" cellpadding="7">
+
+				<p:outputLabel for="question" value="Question: " id="qpanelGrid" />
+				<p:inputText id="question" value="#{questionBean.question}"
+					size="100" required="true" />
+
+				<p:outputLabel for="imageUrl" value="Image URL: " />
+				<p:inputText id="imageUrl" value="#{questionBean.imageUrl}"
+					size="100" />
+
+				<p:outputLabel for="correctAnswerIndex"
+					value="Correct answer index: " />
+				<p:inputNumber id="correctAnswerIndex"
+					value="#{questionBean.correctAnswerIndex}" size="1" maxlength="1"
+					minValue="0" maxValue="4" decimalPlaces="0" />
+
+				<p:outputLabel for="answerText" value="Answer text: " />
+				<p:inputText id="answerText" value="#{questionBean.answerText}"
+					size="100" />
+
+				<p:outputLabel for="answer1" value="Answer 1: " />
+				<p:inputText id="answer1" value="#{questionBean.answer1}" size="100" />
+
+				<p:outputLabel for="answer2" value="Answer 2: " />
+				<p:inputText id="answer2" value="#{questionBean.answer2}" size="100" />
+
+				<p:outputLabel for="answer3" value="Answer 3: " />
+				<p:inputText id="answer3" value="#{questionBean.answer3}" size="100" />
+
+				<p:outputLabel for="answer4" value="Answer 4: " />
+				<p:inputText id="answer4" value="#{questionBean.answer4}" size="100" />
+
+				<p:outputLabel for="difficultyLevel" value="Difficulty level: " />
+				<p:inputNumber id="difficultyLevel"
+					value="#{questionBean.difficultyLevel}" size="1" maxlength="1"
+					minValue="0" maxValue="9" decimalPlaces="0" emptyValue="0" />
+
+				<p:outputLabel value="Subject: " />
+				<p:selectOneMenu id="subject" value="questionBean.subject">
+					<f:selectItems value="#{questionBean.subjects}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Language: " />
+				<p:selectOneMenu id="language" value="questionBean.language">
+					<f:selectItems value="#{questionBean.languages}" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="Add question"
+					actionListener="#{questionBean.addQuestion}" update="growl"
+					styleClass="mt-3" />
+				<!-- 
+				<p:growl id="growl" showDetail="true" life="1800"/>
+				 -->
+				<p:messages id="growl" showDetail="true" closable="true"
+					escape="false">
+					<p:autoUpdate />
+				</p:messages>
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>
